@@ -13,7 +13,7 @@ for elem in elems:
 
     if elem.getText() == "官船":
         if not hit:
-            print("HIT\n")
+            print("!HIT!\n")
         hit = 1
         print("data:\t\t", elem.find_previous().find_previous().getText())
         print("name:\t\t", elem.find_previous().getText())
