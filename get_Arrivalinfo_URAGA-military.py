@@ -1,4 +1,4 @@
-import requests, os, time, datetime
+import requests, os, time, datetime, sys
 from bs4 import BeautifulSoup
 
 all_vessels = []
@@ -12,13 +12,13 @@ def search(elems):
             if not hit:
                 print("HIT!", datetime.datetime.now().strftime('%Y年%m月%d日 %H:%M:%S'), "\n")
                 hit = True
-            print("data:\t\t\t", elem.find_previous().find_previous().getText())
+            print("data:\t\t", elem.find_previous().find_previous().getText())
             name = elem.find_previous().getText()
-            print("name:\t\t\t", name)
-            latest_vessels.append(str(elem.find_previous().getText()))
-            print("type:\t\t\t", elem.getText())
+            print("name:\t\t", name)
+            latest_vessels.append(str(name))
+            print("type:\t\t", elem.getText())
             elem = elem.find_next().find_next().find_next().find_next()
-            print("country:\t\t", elem.getText())
+            print("country:\t", elem.getText())
             elem = elem.find_next()
             print("destination:\t", elem.getText(), "\n")
     if not hit:
@@ -46,14 +46,20 @@ def main(all):
         latest = search(elems)
         if latest != all:
             all = latest
-            note(all)
+            if all:
+                note(all)
     except Exception as e:
         print("ConnectionError, ", e)
     finally:
         return all
 
 
+load_str = ["|", "/", "-", "\\", "|", "/", "-", "\\"]
 while True:
     all_vessels = main(all_vessels)
     print("-------------------------")
-    time.sleep(60)
+    for i in range(10):
+        for fig in load_str:
+            sys.stdout.write("\r%s" % fig)
+            time.sleep(0.125)
+    sys.stdout.write("\r")
