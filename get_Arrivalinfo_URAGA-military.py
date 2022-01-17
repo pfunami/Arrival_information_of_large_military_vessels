@@ -1,4 +1,5 @@
 import requests, os, time, datetime, sys
+import lxml
 from bs4 import BeautifulSoup
 
 all_vessels = []
@@ -54,12 +55,13 @@ def main(all):
         return all
 
 
-load_str = ["|", "/", "-", "\\", "|", "/", "-", "\\"]
-while True:
-    all_vessels = main(all_vessels)
-    print("-------------------------")
-    for i in range(10):
-        for fig in load_str:
-            sys.stdout.write("\r%s" % fig)
-            time.sleep(0.125)
-    sys.stdout.write("\r")
+if __name__ == '__main__':
+    load_str = ["|", "/", "-", "\\", "|", "/", "-", "\\"]
+    while True:
+        all_vessels = main(all_vessels)
+        print("-------------------------")
+        for i in range(60):
+            for fig in load_str:
+                sys.stdout.write("\r%s" % fig)
+                time.sleep(0.125)
+        sys.stdout.write("\r")
