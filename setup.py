@@ -29,6 +29,6 @@ setuptools.setup(
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],
     entry_points={
-        'console_scripts': ['uraga_info = src.get_Arrivalinfo_URAGA-military:main']
+        'console_scripts': ['uraga_info = uraga_src.get_Arrivalinfo_URAGA-military:main']
     },
 )
