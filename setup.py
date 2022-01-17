@@ -18,6 +18,10 @@ setuptools.setup(
     description="You can receive a notification when it was discovered that a large government ship was scheduled to pass through the Uraga Channel.",
     url="https://github.com/ProfFunami/Arrival_information_of_large_military_vessels",
     packages=setuptools.find_packages(),
+    install_requires=[
+        "lxml",
+        "bs4"
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
