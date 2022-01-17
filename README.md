@@ -42,4 +42,4 @@ destination:     横須賀
 /
 ```
 
-<img src="notification_example.png" width="200px">
+<img src="notification_example.png" width="500px">
