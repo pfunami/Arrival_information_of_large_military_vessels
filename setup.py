@@ -14,7 +14,7 @@ setuptools.setup(
     name="Arrival Information of Large Military Vessels",
     version="0.1.0",
     author="D. Nishiyama.",
-    author_email="hirano.shigetoshi@classmethod.jp",
+    author_email="nishiyama.daiki.tu@alumni.tsukuba.ac.jp",
     description="You can receive a notification when it was discovered that a large government ship was scheduled to pass through the Uraga Channel.",
     url="https://github.com/ProfFunami/Arrival_information_of_large_military_vessels",
     packages=setuptools.find_packages(),
