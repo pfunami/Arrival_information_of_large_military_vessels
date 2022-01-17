@@ -2,8 +2,6 @@ import requests, os, time, datetime, sys
 import lxml
 from bs4 import BeautifulSoup
 
-all_vessels = []
-
 
 def search(elems):
     latest_vessels = []
@@ -13,10 +11,11 @@ def search(elems):
             if not hit:
                 print("HIT!", datetime.datetime.now().strftime('%Y年%m月%d日 %H:%M:%S'), "\n")
                 hit = True
-            print("data:\t\t", elem.find_previous().find_previous().getText())
+            data = elem.find_previous().find_previous().getText()
+            print("data:\t\t", data)
             name = elem.find_previous().getText()
             print("name:\t\t", name)
-            latest_vessels.append(str(name))
+            latest_vessels.append(data + " " + name)
             print("type:\t\t", elem.getText())
             elem = elem.find_next().find_next().find_next().find_next()
             print("country:\t", elem.getText())
@@ -32,13 +31,13 @@ def note(vessels):
     if len(vessels) >= 1:
         ves_str = ""
         for vessel in vessels:
-            ves_str += vessel + ", "
+            ves_str += vessel + ",\n"
         ves_str = ves_str[:-2]
         os.system(
             "osascript -e 'display notification \"{}\" with title \"新規入港予定情報取得\"'".format(ves_str))
 
 
-def main(all):
+def get_vessels(all):
     target_url = 'https://www6.kaiho.mlit.go.jp/tokyowan/schedule/URAGA/schedule_3.html'
     try:
         r = requests.get(target_url)
@@ -55,13 +54,20 @@ def main(all):
         return all
 
 
-if __name__ == '__main__':
+def main():
+    all_vessels = []
+    interval = 60
     load_str = ["|", "/", "-", "\\", "|", "/", "-", "\\"]
     while True:
-        all_vessels = main(all_vessels)
+        all_vessels = get_vessels(all_vessels)
         print("-------------------------")
-        for i in range(60):
+        for _ in range(interval):
+            # 1 sec.
             for fig in load_str:
                 sys.stdout.write("\r%s" % fig)
                 time.sleep(0.125)
         sys.stdout.write("\r")
+
+
+if __name__ == '__main__':
+    main()
